@@ -1,0 +1,25 @@
+{
+  "name": "redmod",
+  "version": "1.0.0",
+  "description": "A partial, progressive Redis implementation in Node.js",
+  "main": "redmod.js",
+  "bin": {
+    "redmod": "node ./bin/redmod.js"
+  },
+  "scripts": {
+    "lint": "standard",
+    "lint:fix": "standard --fix",
+    "test": "tap test/*.js"
+  },
+  "author": "Joel Edwards <joeledwards@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "ioredis": "^3.2.2",
+    "standard": "^10.0.3",
+    "tap": "^11.0.1"
+  },
+  "dependencies": {
+    "log-a-log": "^4.0.0",
+    "yargs": "^11.0.0"
+  }
+}
