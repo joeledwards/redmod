@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-const redmod = require('../lib/index.js')
+const server = require('../lib/server.js')
 const config = require('yargs')
   .env('REDMOD')
   .option('bind-ip', {
     type: 'string',
-    desc: 'ip to which the server should bind',
+    desc: 'IP address to which the server should bind',
     default: '0.0.0.0'
   })
   .option('bind-port', {
@@ -15,4 +15,4 @@ const config = require('yargs')
   })
   .argv
 
-redmod(config)
+server(config)
