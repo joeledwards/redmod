@@ -35,6 +35,18 @@ $ redmod
               '-.__.-'
 ```
 
+## Options
+
+```shell
+$ redmon --help
+Options:
+  --help       Show help                                               [boolean]
+  --version    Show version number                                     [boolean]
+  --bind-ip    IP address to which the server should bind
+                                                   [string] [default: "0.0.0.0"]
+  --bind-port  port to which the server should bind     [number] [default: 6379]
+```
+
 [travis-url]: https://travis-ci.org/joeledwards/redmod
 [travis-image]: https://img.shields.io/travis/joeledwards/redmod/master.svg
 [npm-url]: https://www.npmjs.com/package/redmod
