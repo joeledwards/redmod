@@ -4,11 +4,12 @@
   "description": "A partial, progressive Redis implementation in Node.js",
   "main": "redmod.js",
   "bin": {
-    "redmod": "node ./bin/redmod.js"
+    "redmod": "bin/redmod.js"
   },
   "scripts": {
     "lint": "standard",
     "lint:fix": "standard --fix",
+    "start": "node ./bin/redmod.js",
     "test": "tap test/*.js"
   },
   "author": "Joel Edwards <joeledwards@gmail.com>",
