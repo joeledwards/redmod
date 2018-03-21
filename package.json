@@ -1,6 +1,6 @@
 {
   "name": "redmod",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A partial, progressive Redis implementation in Node.js",
   "main": "redmod.js",
   "bin": {
