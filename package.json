@@ -9,19 +9,21 @@
   "scripts": {
     "lint": "standard",
     "lint:fix": "standard --fix",
-    "start": "node ./bin/redmod.js",
+    "start": "nodemon -w lib -w bin ./bin/redmod.js",
     "test": "tap test/*.js"
   },
   "author": "Joel Edwards <joeledwards@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "ioredis": "^3.2.2",
+    "nodemon": "^1.17.2",
     "standard": "^10.0.3",
     "tap": "^11.0.1"
   },
   "dependencies": {
     "@buzuli/color": "^1.1.2",
     "log-a-log": "^4.0.0",
+    "ramda": "^0.25.0",
     "yargs": "^11.0.0"
   }
 }

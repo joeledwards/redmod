@@ -6,6 +6,9 @@ const {
   bulkString,
   array,
   parse,
+  simplify,
+  ok,
+  nil,
   readSimpleString,
   readError,
   readInteger,
@@ -14,6 +17,18 @@ const {
 } = require('../lib/proto')
 
 const json = obj => JSON.stringify(obj)
+
+tap.test('proto.simplify()', async t => {
+  t.equal(json(simplify(parse(simpleString('foobar')))), json(['foobar']))
+})
+
+tap.test('proto.ok()', async t => {
+  t.equal(ok().toString(), '+OK\r\n')
+})
+
+tap.test('proto.nil()', async t => {
+  t.equal(nil().toString(), '$-1\r\n')
+})
 
 tap.test('proto.simpleString()', async t => {
   t.equal(simpleString(null).toString(), '+\r\n')
@@ -62,8 +77,7 @@ tap.test('proto.array()', async t => {
 tap.test('proto.parse()', async t => {
   {
     const buffer = array([1, -2, ['alpha', 'beta']])
-    const [{type, value}, offset] = parse(buffer)
-    t.equal(offset, buffer.length)
+    const {type, value} = parse(buffer)
     t.equal(type, 'arr')
     t.equal(json(value), json([
       {
