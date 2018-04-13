@@ -41,11 +41,24 @@ tap.test('store.get()', async t => {
 tap.test('store.keys()', async t => {
   const s = store()
   const eq = strEq(t)
-  eq(s.keys(), array([]))
+  eq(s.keys(), wrongArgCount('keys'))
+  eq(s.keys('a', 'b'), wrongArgCount('keys'))
   s.set('foo', 'bar')
   s.set('bar', 'foo')
-  eq(s.keys(), array(['foo', 'bar']))
+  eq(s.keys('.'), array(['foo', 'bar']))
   eq(s.keys('oo'), array(['foo']))
+})
+
+tap.test('store.exists()', async t => {
+  const s = store()
+  const eq = strEq(t)
+  eq(s.exists(), wrongArgCount('exists'))
+  s.set('foo', 'bar')
+  s.set('bar', 'foo')
+  eq(s.exists('rob'), integer(0))
+  eq(s.exists('foo'), integer(1))
+  eq(s.exists('bar'), integer(1))
+  eq(s.exists('foo', 'bar'), integer(2))
 })
 
 tap.test('store.del()', async t => {
@@ -111,4 +124,21 @@ tap.test('store.hlen()', async t => {
   eq(s.hlen('foo'), integer(0))
   s.set('foo', 'bar')
   eq(s.hlen('foo'), wrongType)
+})
+
+tap.test('store.hkeys()', async t => {
+  const s = store()
+  const eq = strEq(t)
+  eq(s.hkeys(), wrongArgCount('hkeys'))
+  eq(s.hkeys('foo'), array([]))
+  s.hset('foo', 'a', '1')
+  eq(s.hkeys('foo'), array(['a']))
+  s.hset('foo', 'b', '1')
+  eq(s.hkeys('foo'), array(['a', 'b']))
+  s.hdel('foo', 'a')
+  eq(s.hkeys('foo'), array(['b']))
+  s.hdel('foo', 'b')
+  eq(s.hkeys('foo'), array([]))
+  s.set('foo', 'bar')
+  eq(s.hkeys('foo'), wrongType)
 })
