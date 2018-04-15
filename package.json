@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@buzuli/color": "^1.2.0",
+    "@buzuli/scheduler": "^1.1.1",
     "durations": "^3.4.1",
     "log-a-log": "^5.0.0",
     "ramda": "^0.25.0",
