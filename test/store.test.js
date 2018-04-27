@@ -1,4 +1,5 @@
 const tap = require('tap')
+const scheduler = require('@buzuli/scheduler')
 const store = require('../lib/store')
 const {
   error,
@@ -141,4 +142,147 @@ tap.test('store.hkeys()', async t => {
   eq(s.hkeys('foo'), array([]))
   s.set('foo', 'bar')
   eq(s.hkeys('foo'), wrongType)
+})
+
+tap.test('store.expire()', async t => {
+  let at = -1
+  let now = 0
+  const s = store({
+    nowFunc: () => now,
+    customScheduler: {
+      at: when => {at = when}
+    }
+  })
+  const eq = strEq(t)
+  eq(s.expire(), wrongArgCount('expire'))
+  eq(s.expire('foo'), wrongArgCount('expire'))
+  eq(s.expire('foo', 1, 1), wrongArgCount('expire'))
+  eq(s.expire('foo', 1), integer(0))
+  eq(at, -1)
+  s.set('foo', 'bar')
+  eq(s.expire('foo', 1), integer(1))
+  eq(at, 1000)
+  eq(s.expire('foo', 1), integer(1))
+})
+
+tap.test('store.expireat()', async t => {
+  let at = -1
+  let now = 0
+  const s = store({
+    nowFunc: () => now,
+    customScheduler: {
+      at: when => {at = when}
+    }
+  })
+  const eq = strEq(t)
+  eq(s.expireat(), wrongArgCount('expireat'))
+  eq(s.expireat('foo'), wrongArgCount('expireat'))
+  eq(s.expireat('foo', 1, 1), wrongArgCount('expireat'))
+  eq(s.expireat('foo', 1), integer(0))
+  eq(at, -1)
+  s.set('foo', 'bar')
+  eq(s.expireat('foo', 1), integer(1))
+  eq(at, 1000)
+  eq(s.expireat('foo', 1), integer(1))
+})
+
+tap.test('store.ttl()', async t => {
+  let at = -1
+  let now = 1000
+  const s = store({
+    nowFunc: () => now,
+    customScheduler: {
+      at: when => {at = when}
+    }
+  })
+  const eq = strEq(t)
+  eq(s.ttl(), wrongArgCount('ttl'))
+  eq(s.ttl('foo', 'foo'), wrongArgCount('ttl'))
+  eq(s.ttl('foo'), integer(-2))
+  s.set('foo', 'bar')
+  eq(s.ttl('foo'), integer(-1))
+  s.expire('foo', 1)
+  eq(at, 2000)
+  eq(s.ttl('foo'), integer(1))
+  s.expireat('foo', 2)
+  eq(at, 2000)
+  eq(s.ttl('foo'), integer(1))
+})
+
+tap.test('store.pttl()', async t => {
+  let at = -1
+  let now = 1000
+  const s = store({
+    nowFunc: () => now,
+    customScheduler: {
+      at: when => {at = when}
+    }
+  })
+  const eq = strEq(t)
+  eq(s.pttl(), wrongArgCount('pttl'))
+  eq(s.pttl('foo', 'foo'), wrongArgCount('pttl'))
+  eq(s.pttl('foo'), integer(-2))
+  s.set('foo', 'bar')
+  eq(s.pttl('foo'), integer(-1))
+  s.pexpire('foo', 100)
+  eq(at, 1100)
+  eq(s.pttl('foo'), integer(100))
+  s.pexpireat('foo', 2200)
+  eq(at, 2200)
+  eq(s.pttl('foo'), integer(1200))
+})
+
+tap.test('store.pexpire()', async t => {
+  let at = -1
+  let now = 0
+  const s = store({
+    nowFunc: () => now,
+    customScheduler: {
+      at: when => {at = when}
+    }
+  })
+  const eq = strEq(t)
+  eq(s.pexpire(), wrongArgCount('pexpire'))
+  eq(s.pexpire('foo'), wrongArgCount('pexpire'))
+  eq(s.pexpire('foo', 1, 1), wrongArgCount('pexpire'))
+  eq(s.pexpire('foo', 1), integer(0))
+  eq(at, -1)
+  s.set('foo', 'bar')
+  eq(s.pexpire('foo', 1), integer(1))
+  eq(at, 1)
+  eq(s.pexpire('foo', 1), integer(1))
+})
+
+tap.test('store.pexpireat()', async t => {
+  let at = -1
+  let now = 0
+  const s = store({
+    nowFunc: () => now,
+    customScheduler: {
+      at: when => {at = when}
+    }
+  })
+  const eq = strEq(t)
+  eq(s.pexpireat(), wrongArgCount('pexpireat'))
+  eq(s.pexpireat('foo'), wrongArgCount('pexpireat'))
+  eq(s.pexpireat('foo', 1, 1), wrongArgCount('pexpireat'))
+  eq(s.pexpireat('foo', 1), integer(0))
+  eq(at, -1)
+  s.set('foo', 'bar')
+  eq(s.pexpireat('foo', 1), integer(1))
+  eq(at, 1)
+  eq(s.pexpireat('foo', 1), integer(1))
+})
+
+tap.test('store.persist()', async t => {
+  const s = store({customScheduler: {at: () => {}}})
+  const eq = strEq(t)
+  eq(s.persist(), wrongArgCount('persist'))
+  eq(s.persist('foo', 'bar'), wrongArgCount('persist'))
+  eq(s.persist('foo'), integer(0))
+  s.set('foo', 'bar')
+  eq(s.persist('foo'), integer(0))
+  s.expire('foo', 0)
+  eq(s.persist('foo'), integer(1))
+  eq(s.persist('foo'), integer(0))
 })
