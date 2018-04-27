@@ -21,6 +21,20 @@ const config = require('yargs')
     default: false,
     alias: ['B']
   })
+  .option('commands', {
+    type: 'boolean',
+    desc: 'list all commands and exit',
+    alias: ['c']
+  })
+  .option('commands-sorted', {
+    type: 'boolean',
+    desc: 'list all commands sorted by name and exit',
+    alias: ['C']
+  })
   .argv
 
-server(config)
+if (config.c || config.C) {
+  console.log(require('../lib/store')()._commandList({sorted: config.C}))
+} else {
+  server(config)
+}
