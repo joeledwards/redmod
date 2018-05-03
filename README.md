@@ -15,10 +15,10 @@ $ npm install -g redmod
 
 ```shell
 $ redmod
-[2018-01-24T06:34:06.801Z]|INFO>  Started server...
+[2018-05-03T08:00:16.309Z]|INFO>  Started server...
                 _._
            _.-''   ''-._
-      _.-''     _____   ''-._           redmod 2.0.0
+      _.-''     _____   ''-._           redmod 2.6.1
   .-''        //     \\      ''-._
  (           //       \\          )      PID: 42953
  |'-._       \\       //      _.-'|       IP: 0.0.0.0
@@ -40,11 +40,15 @@ $ redmod
 ```shell
 $ redmon --help
 Options:
-  --help       Show help                                               [boolean]
-  --version    Show version number                                     [boolean]
-  --bind-ip    IP address to which the server should bind
+  --help                 Show help                                     [boolean]
+  --version              Show version number                           [boolean]
+  --bind-ip, -i          IP address to which the server should bind
                                                    [string] [default: "0.0.0.0"]
-  --bind-port  port to which the server should bind     [number] [default: 6379]
+  --bind-port, -p        port to which the server should bind
+                                                        [number] [default: 6379]
+  --brighten-my-day, -B  brighten my day              [boolean] [default: false]
+  --commands, -c         list all commands and exit                    [boolean]
+  --commands-sorted, -C  list all commands sorted by name and exit     [boolean]
 ```
 
 [travis-url]: https://travis-ci.org/joeledwards/redmod
