@@ -1,5 +1,4 @@
 const tap = require('tap')
-const scheduler = require('@buzuli/scheduler')
 const store = require('../lib/store')
 const {
   error,
@@ -10,7 +9,7 @@ const {
   nil
 } = require('../lib/proto')
 
-function wrongArgCount(cmd) {
+function wrongArgCount (cmd) {
   return error(`ERR wrong number of arguments for '${cmd}' command`)
 }
 
@@ -77,7 +76,7 @@ tap.test('store.expire()', async t => {
   const s = store({
     nowFunc: () => now,
     customScheduler: {
-      at: when => {at = when}
+      at: when => { at = when }
     }
   })
   const eq = strEq(t)
@@ -98,7 +97,7 @@ tap.test('store.expireat()', async t => {
   const s = store({
     nowFunc: () => now,
     customScheduler: {
-      at: when => {at = when}
+      at: when => { at = when }
     }
   })
   const eq = strEq(t)
@@ -119,7 +118,7 @@ tap.test('store.ttl()', async t => {
   const s = store({
     nowFunc: () => now,
     customScheduler: {
-      at: when => {at = when}
+      at: when => { at = when }
     }
   })
   const eq = strEq(t)
@@ -142,7 +141,7 @@ tap.test('store.pttl()', async t => {
   const s = store({
     nowFunc: () => now,
     customScheduler: {
-      at: when => {at = when}
+      at: when => { at = when }
     }
   })
   const eq = strEq(t)
@@ -165,7 +164,7 @@ tap.test('store.pexpire()', async t => {
   const s = store({
     nowFunc: () => now,
     customScheduler: {
-      at: when => {at = when}
+      at: when => { at = when }
     }
   })
   const eq = strEq(t)
@@ -186,7 +185,7 @@ tap.test('store.pexpireat()', async t => {
   const s = store({
     nowFunc: () => now,
     customScheduler: {
-      at: when => {at = when}
+      at: when => { at = when }
     }
   })
   const eq = strEq(t)
