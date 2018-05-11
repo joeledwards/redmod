@@ -74,6 +74,19 @@ tap.test('store.renamenx()', async t => {
   eq(s.renamenx('foo', 'bar'), integer(0))
 })
 
+tap.test('store.type()', async t => {
+  const s = store()
+  const eq = strEq(t)
+  eq(s.type(), wrongArgCount('type'))
+  eq(s.type('foo', 'bar'), wrongArgCount('type'))
+  eq(s.type('foo'), bulkString('none'))
+  s.set('foo', 'bar')
+  eq(s.type('foo'), bulkString('string'))
+  s.del('foo')
+  s.hset('foo', 'bar', 'baz')
+  eq(s.type('foo'), bulkString('hash'))
+})
+
 tap.test('store.del()', async t => {
   const s = store()
   const eq = strEq(t)
