@@ -44,6 +44,19 @@ tap.test('store.exists()', async t => {
   eq(s.exists('foo', 'bar'), integer(2))
 })
 
+tap.test('store.type()', async t => {
+  const s = store()
+  const eq = strEq(t)
+  eq(s.type(), wrongArgCount('type'))
+  eq(s.type('foo', 'bar'), wrongArgCount('type'))
+  eq(s.type('foo'), bulkString('none'))
+  s.set('foo', 'bar')
+  eq(s.type('foo'), bulkString('string'))
+  s.del('foo')
+  s.hset('foo', 'bar', 'baz')
+  eq(s.type('foo'), bulkString('hash'))
+})
+
 tap.test('store.rename()', async t => {
   const s = store()
   const eq = strEq(t)
@@ -74,19 +87,6 @@ tap.test('store.renamenx()', async t => {
   eq(s.renamenx('foo', 'bar'), integer(0))
 })
 
-tap.test('store.type()', async t => {
-  const s = store()
-  const eq = strEq(t)
-  eq(s.type(), wrongArgCount('type'))
-  eq(s.type('foo', 'bar'), wrongArgCount('type'))
-  eq(s.type('foo'), bulkString('none'))
-  s.set('foo', 'bar')
-  eq(s.type('foo'), bulkString('string'))
-  s.del('foo')
-  s.hset('foo', 'bar', 'baz')
-  eq(s.type('foo'), bulkString('hash'))
-})
-
 tap.test('store.del()', async t => {
   const s = store()
   const eq = strEq(t)
@@ -97,6 +97,18 @@ tap.test('store.del()', async t => {
   s.hset('foo', 'bar', 'ley')
   eq(s.del('foo'), integer(1))
   eq(s.del('foo'), integer(0))
+})
+
+tap.test('store.unlink()', async t => {
+  const s = store()
+  const eq = strEq(t)
+  eq(s.unlink(), wrongArgCount('unlink'))
+  eq(s.unlink('foo'), integer(0))
+  s.set('foo', 'bar')
+  eq(s.unlink('foo'), integer(1))
+  s.hset('foo', 'bar', 'ley')
+  eq(s.unlink('foo'), integer(1))
+  eq(s.unlink('foo'), integer(0))
 })
 
 tap.test('store.expire()', async t => {
