@@ -58,6 +58,22 @@ tap.test('store.rename()', async t => {
   eq(s.get('bar'), bulkString('biff'))
 })
 
+tap.test('store.renamenx()', async t => {
+  const s = store()
+  const eq = strEq(t)
+  eq(s.renamenx(), wrongArgCount('renamenx'))
+  eq(s.renamenx('foo'), wrongArgCount('renamenx'))
+  eq(s.renamenx('foo', 'bar', 'baz'), wrongArgCount('renamenx'))
+  eq(s.renamenx('foo', 'bar'), error('ERR no such key'))
+  s.set('foo', 'biff')
+  eq(s.renamenx('foo', 'bar'), integer(1))
+  eq(s.get('foo'), nil())
+  eq(s.get('bar'), bulkString('biff'))
+  eq(s.renamenx('foo', 'bar'), error('ERR no such key'))
+  s.set('foo', 'boff')
+  eq(s.renamenx('foo', 'bar'), integer(0))
+})
+
 tap.test('store.del()', async t => {
   const s = store()
   const eq = strEq(t)
