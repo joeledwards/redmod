@@ -17,13 +17,13 @@
   "license": "ISC",
   "devDependencies": {
     "ioredis": "^3.2.2",
-    "nodemon": "^1.17.3",
+    "nodemon": "^1.17.4",
     "standard": "^11.0.1",
-    "tap": "^11.1.4"
+    "tap": "^11.1.5"
   },
   "dependencies": {
     "@buzuli/color": "^1.2.0",
-    "@buzuli/scheduler": "^1.1.1",
+    "@buzuli/scheduler": "^1.2.1",
     "durations": "^3.4.1",
     "log-a-log": "^5.0.0",
     "ramda": "^0.25.0",
