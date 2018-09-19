@@ -34,7 +34,7 @@ const config = require('yargs')
   .argv
 
 if (config.c || config.C) {
-  console.log(require('../lib/store')()._commandList({sorted: config.C}))
+  console.log(require('../lib/store')()._commandList({ sorted: config.C }))
 } else {
   server(config)
 }

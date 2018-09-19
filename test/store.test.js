@@ -21,6 +21,7 @@ function strEq (t) {
   return (a, b) => t.equal(a.toString(), b.toString())
 }
 
+// Keys
 tap.test('store.keys()', async t => {
   const s = store()
   const eq = strEq(t)
@@ -242,7 +243,7 @@ tap.test('store.pexpireat()', async t => {
 })
 
 tap.test('store.persist()', async t => {
-  const s = store({customScheduler: {at: () => {}}})
+  const s = store({ customScheduler: { at: () => {} } })
   const eq = strEq(t)
   eq(s.persist(), wrongArgCount('persist'))
   eq(s.persist('foo', 'bar'), wrongArgCount('persist'))
@@ -253,6 +254,8 @@ tap.test('store.persist()', async t => {
   eq(s.persist('foo'), integer(1))
   eq(s.persist('foo'), integer(0))
 })
+
+// Strings
 tap.test('store.set()', async t => {
   const s = store()
   const eq = strEq(t)
@@ -270,6 +273,7 @@ tap.test('store.get()', async t => {
   eq(s.get('foo'), bulkString('bar'))
 })
 
+// Hashes
 tap.test('store.hset()', async t => {
   const s = store()
   const eq = strEq(t)

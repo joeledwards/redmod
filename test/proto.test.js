@@ -77,7 +77,7 @@ tap.test('proto.array()', async t => {
 tap.test('proto.parse()', async t => {
   {
     const buffer = array([1, -2, ['alpha', 'beta']])
-    const {type, value} = parse(buffer)
+    const { type, value } = parse(buffer)
     t.equal(type, 'arr')
     t.equal(json(value), json([
       {
@@ -108,21 +108,21 @@ tap.test('proto.parse()', async t => {
 tap.test('proto.readSimpleString()', async t => {
   {
     const buffer = error(null)
-    const [{type, value}, offset] = readSimpleString(buffer, 1)
+    const [{ type, value }, offset] = readSimpleString(buffer, 1)
     t.equal(offset, buffer.length)
     t.equal(type, 'str')
     t.equal(value, '')
   }
   {
     const buffer = error('')
-    const [{type, value}, offset] = readSimpleString(buffer, 1)
+    const [{ type, value }, offset] = readSimpleString(buffer, 1)
     t.equal(offset, buffer.length)
     t.equal(type, 'str')
     t.equal(value, '')
   }
   {
     const buffer = error('simple-string')
-    const [{type, value}, offset] = readSimpleString(buffer, 1)
+    const [{ type, value }, offset] = readSimpleString(buffer, 1)
     t.equal(offset, buffer.length)
     t.equal(type, 'str')
     t.equal(value, 'simple-string')
@@ -132,21 +132,21 @@ tap.test('proto.readSimpleString()', async t => {
 tap.test('proto.readError()', async t => {
   {
     const buffer = error(null)
-    const [{type, value}, offset] = readError(buffer, 1)
+    const [{ type, value }, offset] = readError(buffer, 1)
     t.equal(offset, buffer.length)
     t.equal(type, 'err')
     t.equal(value, '')
   }
   {
     const buffer = error('')
-    const [{type, value}, offset] = readError(buffer, 1)
+    const [{ type, value }, offset] = readError(buffer, 1)
     t.equal(offset, buffer.length)
     t.equal(type, 'err')
     t.equal(value, '')
   }
   {
     const buffer = error('error')
-    const [{type, value}, offset] = readError(buffer, 1)
+    const [{ type, value }, offset] = readError(buffer, 1)
     t.equal(offset, buffer.length)
     t.equal(type, 'err')
     t.equal(value, 'error')
@@ -156,14 +156,14 @@ tap.test('proto.readError()', async t => {
 tap.test('proto.readInteger()', async t => {
   {
     const buffer = integer(13)
-    const [{type, value}, offset] = readInteger(buffer, 1)
+    const [{ type, value }, offset] = readInteger(buffer, 1)
     t.equal(offset, buffer.length)
     t.equal(type, 'int')
     t.equal(value, 13)
   }
   {
     const buffer = integer(-13)
-    const [{type, value}, offset] = readInteger(buffer, 1)
+    const [{ type, value }, offset] = readInteger(buffer, 1)
     t.equal(offset, buffer.length)
     t.equal(type, 'int')
     t.equal(value, -13)
@@ -172,7 +172,7 @@ tap.test('proto.readInteger()', async t => {
 
 tap.test('proto.readBulkString()', async t => {
   const buffer = bulkString('bulk-string')
-  const [{type, value}, offset] = readBulkString(buffer, 1)
+  const [{ type, value }, offset] = readBulkString(buffer, 1)
   t.equal(offset, buffer.length)
   t.equal(type, 'blk')
   t.equal(value.toString(), 'bulk-string')
@@ -181,22 +181,22 @@ tap.test('proto.readBulkString()', async t => {
 tap.test('proto.readArray()', async t => {
   {
     const buffer = array([1, 2])
-    const [{type, value}, offset] = readArray(buffer, 1)
+    const [{ type, value }, offset] = readArray(buffer, 1)
     t.equal(offset, buffer.length)
     t.equal(type, 'arr')
     t.equal(json(value), json([
-      {type: 'int', value: 1},
-      {type: 'int', value: 2}
+      { type: 'int', value: 1 },
+      { type: 'int', value: 2 }
     ]))
   }
   {
     const buffer = array(['first', 'second'])
-    const [{type, value}, offset] = readArray(buffer, 1)
+    const [{ type, value }, offset] = readArray(buffer, 1)
     t.equal(offset, buffer.length)
     t.equal(type, 'arr')
     t.equal(json(value), json([
-      {type: 'blk', value: 'first'},
-      {type: 'blk', value: 'second'}
+      { type: 'blk', value: 'first' },
+      { type: 'blk', value: 'second' }
     ]))
   }
 })
