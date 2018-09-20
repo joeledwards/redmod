@@ -1,6 +1,6 @@
 {
   "name": "redmod",
-  "version": "2.9.0",
+  "version": "2.10.0",
   "description": "A partial Redis implementation for Node.js",
   "repository": "github:joeledwards/redmod",
   "main": "redmod.js",
