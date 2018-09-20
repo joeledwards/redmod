@@ -273,6 +273,18 @@ tap.test('store.get()', async t => {
   eq(s.get('foo'), bulkString('bar'))
 })
 
+tap.test('store.getset()', async t => {
+  const s = store()
+  const eq = strEq(t)
+  eq(s.getset(), wrongArgCount('getset'))
+  eq(s.getset('foo'), wrongArgCount('getset'))
+  eq(s.getset('foo', 'bar'), nil())
+  eq(s.getset('foo', 'baz'), bulkString('bar'))
+  s.del('foo')
+  s.hset('foo', 'bar', 'baz')
+  eq(s.getset('foo', 'biz'), wrongType)
+})
+
 // Hashes
 tap.test('store.hset()', async t => {
   const s = store()
