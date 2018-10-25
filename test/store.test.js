@@ -13,6 +13,10 @@ function wrongArgCount (cmd) {
   return error(`ERR wrong number of arguments for '${cmd}' command`)
 }
 
+const notAnInt = error(
+  'ERR value is not an integer or out of range'
+)
+
 const wrongType = error(
   'WRONGTYPE Operation against a key holding the wrong kind of value'
 )
@@ -283,6 +287,42 @@ tap.test('store.getset()', async t => {
   s.del('foo')
   s.hset('foo', 'bar', 'baz')
   eq(s.getset('foo', 'biz'), wrongType)
+})
+
+tap.test('store.psetex()', async t => {
+  let at = -1
+  let now = 1000
+  const s = store({
+    nowFunc: () => now,
+    customScheduler: {
+      at: when => { at = when }
+    }
+  })
+  const eq = strEq(t)
+  eq(s.psetex('foo'), wrongArgCount('psetex'))
+  eq(s.psetex('foo', 1), wrongArgCount('psetex'))
+  eq(s.psetex('foo', 'bar', 'biz'), notAnInt)
+  eq(s.get('foo'), nil())
+  eq(s.psetex('foo', 1, 'bar'), ok())
+  eq(at, 1001)
+})
+
+tap.test('store.setex()', async t => {
+  let at = -1
+  let now = 1000
+  const s = store({
+    nowFunc: () => now,
+    customScheduler: {
+      at: when => { at = when }
+    }
+  })
+  const eq = strEq(t)
+  eq(s.setex('foo'), wrongArgCount('setex'))
+  eq(s.setex('foo', 1), wrongArgCount('setex'))
+  eq(s.setex('foo', 'bar', 'biz'), notAnInt)
+  eq(s.get('foo'), nil())
+  eq(s.setex('foo', 1, 'bar'), ok())
+  eq(at, 2000)
 })
 
 // Hashes
