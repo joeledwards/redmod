@@ -268,6 +268,23 @@ tap.test('store.set()', async t => {
   eq(s.set('foo', 'bar'), ok())
 })
 
+tap.test('store.setnx()', async t => {
+  const s = store()
+  const eq = strEq(t)
+  eq(s.setnx(), wrongArgCount('setnx'))
+  eq(s.setnx('foo'), wrongArgCount('setnx'))
+  eq(s.setnx('foo', 'bar'), integer(1))
+  eq(s.get('foo'), bulkString('bar'))
+  eq(s.setnx('foo', 'baz'), integer(0))
+  eq(s.get('foo'), bulkString('bar'))
+  s.del('foo')
+  s.hset('foo', 'bar', 'baz')
+  eq(s.setnx('foo', 'biz'), integer(0))
+  s.del('foo')
+  eq(s.setnx('foo', 'buzz'), integer(1))
+  eq(s.get('foo'), bulkString('buzz'))
+})
+
 tap.test('store.get()', async t => {
   const s = store()
   const eq = strEq(t)
