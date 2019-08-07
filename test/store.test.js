@@ -118,7 +118,7 @@ tap.test('store.unlink()', async t => {
 
 tap.test('store.expire()', async t => {
   let at = -1
-  let now = 0
+  const now = 0
   const s = store({
     nowFunc: () => now,
     customScheduler: {
@@ -139,7 +139,7 @@ tap.test('store.expire()', async t => {
 
 tap.test('store.expireat()', async t => {
   let at = -1
-  let now = 0
+  const now = 0
   const s = store({
     nowFunc: () => now,
     customScheduler: {
@@ -160,7 +160,7 @@ tap.test('store.expireat()', async t => {
 
 tap.test('store.ttl()', async t => {
   let at = -1
-  let now = 1000
+  const now = 1000
   const s = store({
     nowFunc: () => now,
     customScheduler: {
@@ -183,7 +183,7 @@ tap.test('store.ttl()', async t => {
 
 tap.test('store.pttl()', async t => {
   let at = -1
-  let now = 1000
+  const now = 1000
   const s = store({
     nowFunc: () => now,
     customScheduler: {
@@ -206,7 +206,7 @@ tap.test('store.pttl()', async t => {
 
 tap.test('store.pexpire()', async t => {
   let at = -1
-  let now = 0
+  const now = 0
   const s = store({
     nowFunc: () => now,
     customScheduler: {
@@ -227,7 +227,7 @@ tap.test('store.pexpire()', async t => {
 
 tap.test('store.pexpireat()', async t => {
   let at = -1
-  let now = 0
+  const now = 0
   const s = store({
     nowFunc: () => now,
     customScheduler: {
@@ -308,7 +308,7 @@ tap.test('store.getset()', async t => {
 
 tap.test('store.psetex()', async t => {
   let at = -1
-  let now = 1000
+  const now = 1000
   const s = store({
     nowFunc: () => now,
     customScheduler: {
@@ -326,7 +326,7 @@ tap.test('store.psetex()', async t => {
 
 tap.test('store.setex()', async t => {
   let at = -1
-  let now = 1000
+  const now = 1000
   const s = store({
     nowFunc: () => now,
     customScheduler: {
