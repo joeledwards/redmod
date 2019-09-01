@@ -50,6 +50,102 @@ Options:
   --commands-sorted, -C  list all commands sorted by name and exit     [boolean]
 ```
 
+## Supported Redis Features & Commands
+
+### Connection and Health
+- info (partial)
+- ping
+- quit
+
+### Keys
+- del
+- exists
+- expire
+- expireat
+- keys
+- persist
+- pexpire
+- pexpireat
+- pttl
+- rename
+- renamenx
+- ttl
+- type
+- unlink
+
+### Strings
+- get
+- getset
+- psetex
+- set
+- setex
+- setnx
+
+### Hashes
+- hdel
+- hget
+- hkeys
+- hlen
+- hset
+
+### Pub/Sub
+- publish
+- subscribe
+- unsubscribe
+
+## Roadmap: Planned Redis Features and Commands
+
+### Hashes
+- hexists
+- hgetall
+- hmget
+- hmset
+- hsetnx
+- hstrlen
+- hvals
+- hincrby
+- hincrbyfloat
+
+### Lists
+- lpush
+- lpop
+- lpushx
+- rpush
+- rpop
+- rpushx
+- rpoplpush
+- llen
+- lindex
+- lrem
+- lset
+- linsert
+- lrange
+- ltrim
+- blpop
+- brpop
+- brpoplpush
+
+### Sets
+- sadd
+- srem
+- spop
+- scard 
+- smembers
+- sismember
+- srandmember
+- smove
+- sdiff
+- sdiffstore
+- sinter
+- sinterstore
+- sunion
+- sunionstore
+
+### Scanning
+- scan
+- hscan
+- sscan
+
 [travis-url]: https://travis-ci.org/joeledwards/redmod
 [travis-image]: https://img.shields.io/travis/joeledwards/redmod/master.svg
 [npm-url]: https://www.npmjs.com/package/redmod
