@@ -75,34 +75,32 @@ tap.test('proto.array()', async t => {
 })
 
 tap.test('proto.parse()', async t => {
-  {
-    const buffer = array([1, -2, ['alpha', 'beta']])
-    const { type, value } = parse(buffer)
-    t.equal(type, 'arr')
-    t.equal(json(value), json([
-      {
-        type: 'int',
-        value: 1
-      },
-      {
-        type: 'int',
-        value: -2
-      },
-      {
-        type: 'arr',
-        value: [
-          {
-            type: 'blk',
-            value: 'alpha'
-          },
-          {
-            type: 'blk',
-            value: 'beta'
-          }
-        ]
-      }
-    ]))
-  }
+  const buffer = array([1, -2, ['alpha', 'beta']])
+  const { type, value } = parse(buffer)
+  t.equal(type, 'arr')
+  t.equal(json(value), json([
+    {
+      type: 'int',
+      value: 1
+    },
+    {
+      type: 'int',
+      value: -2
+    },
+    {
+      type: 'arr',
+      value: [
+        {
+          type: 'blk',
+          value: 'alpha'
+        },
+        {
+          type: 'blk',
+          value: 'beta'
+        }
+      ]
+    }
+  ]))
 })
 
 tap.test('proto.readSimpleString()', async t => {
