@@ -16,17 +16,17 @@
   "author": "Joel Edwards <joeledwards@gmail.com>",
   "license": "ISC",
   "devDependencies": {
-    "ioredis": "^4.14.1",
-    "nodemon": "^2.0.2",
-    "standard": "^14.3.1",
-    "tap": "^14.10.5",
-    "yargs": "^15.0.2"
+    "ioredis": "^4.17.3",
+    "nodemon": "^2.0.4",
+    "standard": "^14.3.4",
+    "tap": "^14.10.8",
+    "yargs": "^16.0.3"
   },
   "dependencies": {
     "@buzuli/color": "^2.2.2",
     "@buzuli/scheduler": "^2.0.0",
     "durations": "^3.4.2",
     "log-a-log": "^6.0.0",
-    "ramda": "^0.26.1"
+    "ramda": "^0.27.1"
   }
 }
