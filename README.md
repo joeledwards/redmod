@@ -89,6 +89,7 @@ Options:
 - hkeys
 - hlen
 - hset
+- hsetnx
 
 ### Pub/Sub
 - publish
@@ -100,7 +101,6 @@ Options:
 ### Hashes
 - hmget
 - hmset
-- hsetnx
 - hstrlen
 - hvals
 - hincrby
