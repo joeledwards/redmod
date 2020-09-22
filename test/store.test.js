@@ -355,6 +355,18 @@ tap.test('store.hset()', async t => {
   eq(s.hget('foo', 'bar'), bulkString('soap'))
 })
 
+tap.test('store.hsetnx()', async t => {
+  const s = store()
+  const eq = strEq(t)
+  eq(s.hsetnx(), wrongArgCount('hsetnx'))
+  eq(s.hsetnx('foo'), wrongArgCount('hsetnx'))
+  eq(s.hsetnx('foo', 'bar'), wrongArgCount('hsetnx'))
+  eq(s.hsetnx('foo', 'bar', 'ley'), integer(1))
+  eq(s.hget('foo', 'bar'), bulkString('ley'))
+  eq(s.hsetnx('foo', 'bar', 'soap'), integer(0))
+  eq(s.hget('foo', 'bar'), bulkString('ley'))
+})
+
 tap.test('store.hget()', async t => {
   const s = store()
   const eq = strEq(t)
