@@ -425,3 +425,16 @@ tap.test('store.hexists()', async t => {
   s.set('bar', '1')
   eq(s.hexists('bar', 'a'), wrongType)
 })
+
+tap.test('store.hgetall()', async t => {
+  const s = store()
+  const eq = strEq(t)
+  eq(s.hgetall(), wrongArgCount('hgetall'))
+  eq(s.hgetall('foo'), array([]))
+  s.hset('foo', 'a', '1')
+  eq(s.hgetall('foo'), array(['a', '1']))
+  s.hset('foo', 'b', '2')
+  eq(s.hgetall('foo'), array(['a', '1', 'b', '2']))
+  s.set('bar', '1')
+  eq(s.hgetall('bar'), wrongType)
+})

@@ -85,6 +85,7 @@ Options:
 - hdel
 - hexists
 - hget
+- hgetall
 - hkeys
 - hlen
 - hset
@@ -97,7 +98,6 @@ Options:
 ## Roadmap: Planned Redis Features and Commands
 
 ### Hashes
-- hgetall
 - hmget
 - hmset
 - hsetnx
